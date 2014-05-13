@@ -240,19 +240,17 @@ echo "htop"  | tee -a log-install.txt
 echo "iftop"  | tee -a log-install.txt
 echo "mtr"  | tee -a log-install.txt
 echo "rkhunter"  | tee -a log-install.txt
-echo "nethogs: nethogs venet0"  | tee -a log-install.txt
+echo "nethogs"  | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
 echo "Script"  | tee -a log-install.txt
 echo "------"  | tee -a log-install.txt
 echo "screenfetch"  | tee -a log-install.txt
 echo "./ps_mem.py"  | tee -a log-install.txt
-echo "./speedtest_cli.py --share"  | tee -a log-install.txt
+echo "./speedtest_cli--share"  | tee -a log-install.txt
 echo "./bench-network.sh"  | tee -a log-install.txt
-echo "./userlogin.sh" | tee -a log-install.txt
-echo "./userexpired.sh" | tee -a log-install.txt
-echo "./userlimit.sh 2 [ini utk melimit max 2 login]" | tee -a log-install.txt
-#echo "./userlimitssh.sh 2" | tee -a log-install.txt
-echo "sh dropmon [port] contoh: sh dropmon 443" | tee -a log-install.txt
+echo "./netzonelogin.sh" | tee -a log-install.txt
+echo "./ceklogin.sh" | tee -a log-install.txt
+echo "./exp.sh" | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
 echo "Fitur lain"  | tee -a log-install.txt
 echo "----------"  | tee -a log-install.txt
@@ -263,7 +261,7 @@ echo "Timezone : Asia/Jakarta"  | tee -a log-install.txt
 echo "Fail2Ban : [on]"  | tee -a log-install.txt
 echo "IPv6     : [off]"  | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
-echo "Script Modified by Yurissh OpenSource"  | tee -a log-install.txt
+echo "Script Modified by Danyjrx"  | tee -a log-install.txt
 echo "Thanks to Original Creator Kang Arie & Mikodemos"
 echo ""  | tee -a log-install.txt
 echo "SILAHKAN REBOOT VPS ANDA"  | tee -a log-install.txt
