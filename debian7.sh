@@ -24,7 +24,7 @@ sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 service ssh restart
 
 # set repo
-wget -O /etc/apt/sources.list "https://raw.github.com/Danyjrx/Auto-Script-Debian7/master/sources.list.debian7"
+wget -O /etc/apt/sources.list "https://raw.github.com/Danyjrx/Bumbu_pepes/master/sources.list.debian7"
 wget "http://www.dotdeb.org/dotdeb.gpg"
 wget "http://www.webmin.com/jcameron-key.asc"
 cat dotdeb.gpg | apt-key add -;rm dotdeb.gpg
@@ -60,7 +60,7 @@ service vnstat restart
 
 # install screenfetch
 cd
-wget 'https://raw.github.com/Danyjrx/Auto-Script-Debian7/master/screeftech-dev'
+wget 'https://raw.github.com/Danyjrx/Bumbu_pepes//master/screeftech-dev'
 mv screeftech-dev /usr/bin/screenfetch
 chmod +x /usr/bin/screenfetch
 echo "clear" >> .profile
@@ -70,24 +70,24 @@ echo "screenfetch" >> .profile
 cd
 rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
-wget -O /etc/nginx/nginx.conf "https://raw.github.com/Danyjrx/Auto-Script-Debian7/master/nginx.conf"
+wget -O /etc/nginx/nginx.conf "https://raw.github.com/Danyjrx/Bumbu_pepes//master/nginx.conf"
 mkdir -p /home/vps/public_html
 echo "<pre>Modified by Danyjrx</pre>" > /home/vps/public_html/index.html
 echo "<?php phpinfo(); ?>" > /home/vps/public_html/info.php
-wget -O /etc/nginx/conf.d/vps.conf "https://raw.github.com/Danyjrx/Auto-Script-Debian7/master/vps.conf"
+wget -O /etc/nginx/conf.d/vps.conf "https://raw.github.com/Danyjrx/Bumbu_pepes//master/vps.conf"
 sed -i 's/listen = \/var\/run\/php5-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php5/fpm/pool.d/www.conf
 service php5-fpm restart
 service nginx restart
 
 # install openvpn
-wget -O /etc/openvpn/openvpn.tar "https://raw.github.com/Danyjrx/Auto-Script-Debian7/master/openvpn-debian.tar"
+wget -O /etc/openvpn/openvpn.tar "https://raw.github.com/Danyjrx/Bumbu_pepes//master/openvpn-debian.tar"
 cd /etc/openvpn/
 tar xf openvpn.tar
-wget -O /etc/openvpn/1194.conf "https://raw.github.com/Danyjrx/Auto-Script-Debian7/master/1194.conf"
+wget -O /etc/openvpn/1194.conf "https://raw.github.com/Danyjrx/Bumbu_pepes//master/1194.conf"
 service openvpn restart
 sysctl -w net.ipv4.ip_forward=1
 sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
-wget -O /etc/iptables.up.rules "https://raw.github.com/Danyjrx/Auto-Script-Debian7/master/iptables.up.rules"
+wget -O /etc/iptables.up.rules "https://raw.github.com/Danyjrx/Bumbu_pepes/master/iptables.up.rules"
 sed -i '$ i\iptables-restore < /etc/iptables.up.rules' /etc/rc.local
 sed -i $MYIP2 /etc/iptables.up.rules;
 iptables-restore < /etc/iptables.up.rules
@@ -95,7 +95,7 @@ service openvpn restart
 
 # configure openvpn client config
 cd /etc/openvpn/
-wget -O /etc/openvpn/1194-client.ovpn "https://raw.github.com/Danyjrx/Auto-Script-Debian7/master/1194-client.conf"
+wget -O /etc/openvpn/1194-client.ovpn "https://raw.github.com/Danyjrx/Bumbu_pepes/master/1194-client.conf"
 sed -i $MYIP2 /etc/openvpn/1194-client.ovpn;
 PASS=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 15 | head -n 1`;
 useradd -M -s /bin/false YurisshOS
@@ -118,8 +118,8 @@ screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300
 
 
 # install mrtg
-wget -O /etc/snmp/snmpd.conf "https://raw.github.com/Danyjrx/Auto-Script-Debian7/master/snmpd.conf"
-wget -O /root/mrtg-mem.sh "https://raw.github.com/Danyjrx/Auto-Script-Debian7/master/mrtg-mem.sh"
+wget -O /etc/snmp/snmpd.conf "https://raw.github.com/Danyjrx/Bumbu_pepes/master/snmpd.conf"
+wget -O /root/mrtg-mem.sh "https://raw.github.com/Danyjrx/Bumbu_pepes/master/mrtg-mem.sh"
 chmod +x /root/mrtg-mem.sh
 cd /etc/snmp/
 sed -i 's/TRAPDRUN=no/TRAPDRUN=yes/g' /etc/default/snmpd
@@ -170,7 +170,7 @@ apt-get -y install fail2ban;service fail2ban restart
 
 # install squid3
 apt-get -y install squid3
-wget -O /etc/squid3/squid.conf "https://raw.github.com/Danyjrx/Auto-Script-Debian7/master/squid3.conf"
+wget -O /etc/squid3/squid.conf "https://raw.github.com/Danyjrx/Bumbu_pepes/master/squid3.conf"
 sed -i $MYIP2 /etc/squid3/squid.conf;
 service squid3 restart
 
@@ -185,12 +185,12 @@ service vnstat restart
 
 # download script
 cd
-wget -0 bench-network.sh "https://raw.github.com/Danyjrx/Auto-Script-Debian7/master/bench-network.sh"
+wget -0 bench-network.sh "https://raw.github.com/Danyjrx/Bumbu_pepes/master/bench-network.sh"
 wget -O speedtest-cli https://raw.github.com/sivel/speedtest-cli/master/speedtest_cli.py
-wget -O netzonelogin.sh "https://raw.github.com/Danyjrx/Auto-Script-Debian7/master/netzonelogin.sh"
+wget -O netzonelogin.sh "https://raw.github.com/Danyjrx/Bumbu_pepes/master/netzonelogin.sh"
 wget -O ps_mem.py "https://raw.github.com/pixelb/ps_mem/master/ps_mem.py"
-wget -O netzonelogin.sh "https://raw.github.com/Danyjrx/Auto-Script-Debian7/master/ceklogin.sh"
-wget -O exp.sh "https://raw.github.com/Danyjrx/Auto-Script-Debian7/master/exp.sh"
+wget -O netzonelogin.sh "https://raw.github.com/Danyjrx/Bumbu_pepes/master/ceklogin.sh"
+wget -O exp.sh "https://raw.github.com/Danyjrx/Bumbu_pepes/master/exp.sh"
 echo "0 0 * * * root /usr/bin/reboot" > /etc/cron.d/reboot
 chmod +x bench-network.sh
 chmod +x speedtest-cli
@@ -225,9 +225,9 @@ echo ""  | tee -a log-install.txt
 echo "Service"  | tee -a log-install.txt
 echo "-------"  | tee -a log-install.txt
 echo "OpenVPN  : TCP 1194 (client config : http://$MYIP:81/client.tar)"  | tee -a log-install.txt
-echo "OpenSSH  : 22, 80, 143"  | tee -a log-install.txt
+echo "OpenSSH  : 22, 143"  | tee -a log-install.txt
 echo "Dropbear : 109, 110, 443"  | tee -a log-install.txt
-echo "Squid3   : 8080 (limit to IP SSH)"  | tee -a log-install.txt
+echo "Squid3   : 80 (limit to IP SSH)"  | tee -a log-install.txt
 echo "badvpn   : badvpn-udpgw port 7300"  | tee -a log-install.txt
 echo "nginx    : 81"  | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
