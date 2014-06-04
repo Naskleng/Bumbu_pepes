@@ -44,7 +44,22 @@ apt-get -y install nginx php5-fpm php5-cli
 
 # install essential package
 echo "mrtg mrtg/conf_mods boolean true" | debconf-set-selections
-apt-get -y install bmon iftop htop nmap axel nano iptables traceroute sysv-rc-conf dnsutils bc nethogs openvpn vnstat less screen psmisc apt-file whois ptunnel ngrep mtr git zsh mrtg snmp snmpd snmp-mibs-downloader unzip unrar rsyslog debsums rkhunter
+apt-get -y install vnstat
+apt-get -y install nethogs
+apt-get -y install mrtg
+apt-get -y install snmp
+apt-get -y install snmpd
+apt-get -y install ngrep
+apt-get -y install screen
+apt-get -y install nano
+apt-get -y install ptunnel
+apt-get -y install apt-file
+apt-get -y install unzip
+apt-get -y install unrar
+apt-get -y install rkhunter
+apt-get -y install rsyslog
+apt-get -y install debsums
+apt-get -y install snmp-mibs-downloader
 apt-get -y install build-essential
 
 # disable exim
@@ -78,44 +93,6 @@ wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/Naskleng/B
 sed -i 's/listen = \/var\/run\/php5-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php5/fpm/pool.d/www.conf
 service php5-fpm restart
 service nginx restart
-
-# install openvpn
-wget -O /etc/openvpn/openvpn.tar "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/openvpn-debian.tar"
-cd /etc/openvpn/
-tar xf openvpn.tar
-wget -O /etc/openvpn/1194.conf "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/1194.conf"
-service openvpn restart
-sysctl -w net.ipv4.ip_forward=1
-sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
-wget -O /etc/iptables.up.rules "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/iptables.up.rules"
-sed -i '$ i\iptables-restore < /etc/iptables.up.rules' /etc/rc.local
-sed -i $MYIP2 /etc/iptables.up.rules;
-iptables-restore < /etc/iptables.up.rules
-service openvpn restart
-
-# configure openvpn client config
-cd /etc/openvpn/
-wget -O /etc/openvpn/1194-client.ovpn "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/1194-client.conf"
-sed -i $MYIP2 /etc/openvpn/1194-client.ovpn;
-PASS=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 15 | head -n 1`;
-useradd -M -s /bin/false YurisshOS
-echo "YurisshOS:$PASS" | chpasswd
-echo "username" >> pass.txt
-echo "password" >> pass.txt
-tar cf client.tar 1194-client.ovpn pass.txt
-cp client.tar /home/vps/public_html/
-cd
-
-# install badvpn
-wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/yurisshOS/debian7os/master/badvpn-udpgw"
-if [ "$OS" == "x86_64" ]; then
-  wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/yurisshOS/debian7os/master/badvpn-udpgw64"
-fi
-sed -i '$ i\screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300' /etc/rc.local
-#sed -i '$ i\screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300' /etc/rc.d/rc.local
-chmod +x /usr/bin/badvpn-udpgw
-screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300
-
 
 # install mrtg
 wget -O /etc/snmp/snmpd.conf "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/snmpd.conf"
@@ -169,12 +146,6 @@ cd
 # install fail2ban
 apt-get -y install fail2ban;service fail2ban restart
 
-# install squid3
-apt-get -y install squid3
-wget -O /etc/squid3/squid.conf "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/squid3.conf"
-sed -i $MYIP2 /etc/squid3/squid.conf;
-service squid3 restart
-
 # install webmin
 cd
 wget http://prdownloads.sourceforge.net/webadmin/webmin_1.690_all.deb
@@ -190,7 +161,7 @@ wget -0 bench-network.sh "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes
 wget -O speedtest-cli "https://raw.github.com/sivel/speedtest-cli/master/speedtest_cli.py"
 wget -O netzonelogin.sh "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/netzonelogin.sh"
 wget -O ps_mem.py "https://raw.github.com/pixelb/ps_mem/master/ps_mem.py"
-wget -O netzonelogin.sh "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/ceklogin.sh"
+wget -O ceklogin.sh "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/ceklogin.sh"
 wget -O exp.sh "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/exp.sh"
 echo "0 0 * * * root /usr/bin/reboot" > /etc/cron.d/reboot
 chmod +x bench-network.sh
