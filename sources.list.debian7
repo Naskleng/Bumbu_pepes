@@ -1,5 +1,4 @@
 deb http://mirror.nus.edu.sg/ubuntu/ lucid main 
 deb-src http://mirror.nus.edu.sg/ubuntu/ lucid main 
-deb http://packages.dotdeb.org wheezy all
 deb http://download.webmin.com/download/repository sarge contrib
 deb http://webmin.mirror.somersettechsolutions.co.uk/repository sarge contrib 
