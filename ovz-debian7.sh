@@ -40,27 +40,27 @@ apt-get -y --purge remove bind9*;
 apt-get update; apt-get -y upgrade;
 
 # install webserver
-apt-get -y install nginx php5-fpm php5-cli
+sudo apt-get -y install nginx php5-fpm php5-cli
 
 # install essential package
 echo "mrtg mrtg/conf_mods boolean true" | debconf-set-selections
-apt-get -y install vnstat
-apt-get -y install nethogs
-apt-get -y install mrtg
-apt-get -y install snmp
-apt-get -y install snmpd
-apt-get -y install ngrep
-apt-get -y install screen
-apt-get -y install nano
-apt-get -y install ptunnel
-apt-get -y install apt-file
-apt-get -y install unzip
-apt-get -y install unrar
-apt-get -y install rkhunter
-apt-get -y install rsyslog
-apt-get -y install debsums
-apt-get -y install snmp-mibs-downloader
-apt-get -y install build-essential
+sudo apt-get -y install vnstat
+sudo apt-get -y install nethogs
+sudo apt-get -y install mrtg
+sudo apt-get -y install snmp
+sudo apt-get -y install snmpd
+sudo apt-get -y install ngrep
+sudo apt-get -y install screen
+sudo apt-get -y install nano
+sudo apt-get -y install ptunnel
+sudo apt-get -y install apt-file
+sudo apt-get -y install unzip
+sudo apt-get -y install unrar
+sudo apt-get -y install rkhunter
+sudo apt-get -y install rsyslog
+sudo apt-get -y install debsums
+sudo apt-get -y install snmp-mibs-downloader
+sudo apt-get -y install build-essential
 
 # disable exim
 service exim4 stop
