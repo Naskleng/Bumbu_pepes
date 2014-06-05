@@ -24,7 +24,7 @@ sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 service ssh restart
 
 # set repo
-wget -O /etc/apt/sources.list "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/sources.list.debian7"
+wget -O /etc/apt/sources.list "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/sources.list.debian7" c
 wget "http://www.dotdeb.org/dotdeb.gpg"
 wget "http://www.webmin.com/jcameron-key.asc"
 cat dotdeb.gpg | apt-key add -;rm dotdeb.gpg
@@ -60,7 +60,7 @@ service vnstat restart
 
 # install screenfetch
 cd
-wget 'https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/screeftech-dev'
+wget 'https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/screeftech-dev' --no-check-certificate
 mv screeftech-dev /usr/bin/screenfetch
 chmod +x /usr/bin/screenfetch
 echo "clear" >> .profile
@@ -70,24 +70,24 @@ echo "screenfetch" >> .profile
 cd
 rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
-wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/master/nginx.conf"
+wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/nginx.conf" --no-check-certificate
 mkdir -p /home/vps/public_html
 echo "<pre>Modified by Danyjrx</pre>" > /home/vps/public_html/index.html
 echo "<?php phpinfo(); ?>" > /home/vps/public_html/info.php
-wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/vps.conf"
+wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/vps.conf" --no-check-certificate
 sed -i 's/listen = \/var\/run\/php5-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php5/fpm/pool.d/www.conf
 service php5-fpm restart
 service nginx restart
 
 # install openvpn
-wget -O /etc/openvpn/openvpn.tar "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/openvpn-debian.tar"
+wget -O /etc/openvpn/openvpn.tar "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/openvpn-debian.tar" --no-check-certificate
 cd /etc/openvpn/
 tar xf openvpn.tar
-wget -O /etc/openvpn/1194.conf "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/1194.conf"
+wget -O /etc/openvpn/1194.conf "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/1194.conf" --no-check-certificate
 service openvpn restart
 sysctl -w net.ipv4.ip_forward=1
 sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
-wget -O /etc/iptables.up.rules "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/iptables.up.rules"
+wget -O /etc/iptables.up.rules "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/iptables.up.rules" --no-check-certificate
 sed -i '$ i\iptables-restore < /etc/iptables.up.rules' /etc/rc.local
 sed -i $MYIP2 /etc/iptables.up.rules;
 iptables-restore < /etc/iptables.up.rules
@@ -95,7 +95,7 @@ service openvpn restart
 
 # configure openvpn client config
 cd /etc/openvpn/
-wget -O /etc/openvpn/1194-client.ovpn "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/1194-client.conf"
+wget -O /etc/openvpn/1194-client.ovpn "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/1194-client.conf" --no-check-certificate
 sed -i $MYIP2 /etc/openvpn/1194-client.ovpn;
 PASS=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 15 | head -n 1`;
 useradd -M -s /bin/false Danyjrx
@@ -181,7 +181,7 @@ apt-get -y install fail2ban;service fail2ban restart
 
 # install squid3
 apt-get -y install squid3
-wget -O /etc/squid3/squid.conf "https://raw.github.com/yurisshOS/debian7os/master/squid3.conf"
+wget -O /etc/squid3/squid.conf "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/squid3.conf" --no-check-certificate
 sed -i $MYIP2 /etc/squid3/squid.conf;
 service squid3 restart
 
