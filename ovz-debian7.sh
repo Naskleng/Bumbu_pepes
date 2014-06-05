@@ -139,6 +139,7 @@ cd
 sed -i '/Port 22/a Port  143' /etc/ssh/sshd_config
 sed -i '/Port 22/a Port  80' /etc/ssh/sshd_config
 sed -i 's/Port 22/Port  22/g' /etc/ssh/sshd_config
+sed -i 's/#Banner/Banner/g' /etc/ssh/sshd_config
 service ssh restart
 
 # install dropbear
@@ -146,6 +147,7 @@ apt-get -y install dropbear
 sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
 sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=443/g' /etc/default/dropbear
 sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS=""/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_BANNER=""/DROPBEAR_BANNER="/etc/issue.net
 echo "/bin/false" >> /etc/shells
 echo "/usr/sbin/nologin" >> /etc/shells
 service ssh restart
