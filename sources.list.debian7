@@ -1,6 +1,4 @@
-deb http://cdn.debian.net/debian wheezy main contrib non-free
-deb http://security.debian.org/ wheezy/updates main contrib non-free
-deb http://packages.dotdeb.org wheezy alldeb http://mirror.nus.edu.sg/ubuntu/ utopic main 
-deb-src http://mirror.nus.edu.sg/ubuntu/ utopic main 
+deb http://mirror.nus.edu.sg/ubuntu/ precise main 
+deb-src http://mirror.nus.edu.sg/ubuntu/ precise main 
 deb http://download.webmin.com/download/repository sarge contrib
 deb http://webmin.mirror.somersettechsolutions.co.uk/repository sarge contrib 
