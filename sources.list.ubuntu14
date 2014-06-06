@@ -1,9 +1,4 @@
-deb http://sg.archive.ubuntu.com/ubuntu/ trusty main restricted 
-deb-src http://sg.archive.ubuntu.com/ubuntu/ trusty main restricted 
-deb http://sg.archive.ubuntu.com/ubuntu/ trusty-security main restricted 
-deb http://sg.archive.ubuntu.com/ubuntu/ trusty-updates main restricted 
-deb-src http://sg.archive.ubuntu.com/ubuntu/ trusty-security main restricted 
-deb-src http://sg.archive.ubuntu.com/ubuntu/ trusty-updates main restricted 
-deb http://extras.ubuntu.com/ubuntu trusty main
+deb http://mirror.nus.edu.sg/ubuntu/ trusty main 
+deb-src http://mirror.nus.edu.sg/ubuntu/ trusty main 
 deb http://download.webmin.com/download/repository sarge contrib
 deb http://webmin.mirror.somersettechsolutions.co.uk/repository sarge contrib
