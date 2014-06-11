@@ -1,4 +1,4 @@
-# !/bin/bash
+#!/bin/bash
 # Program untuk membatasi jumlah login user dropbear
 # di tulis oleh mikodemos
 # 
