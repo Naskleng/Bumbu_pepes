@@ -46,7 +46,7 @@ rm -f /tmp/pids
 rm -f /tmp/sks
 rm -f /tmp/user1
 exit 0
-;;;
+;;
 2)
 echo -n > /tmp/user1
 echo -n > /tmp/user2
