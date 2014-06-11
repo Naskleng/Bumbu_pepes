@@ -93,6 +93,7 @@ rm -f /tmp/pids
 rm -f /tmp/sks
 rm -f /tmp/user1
 rm -f /tmp/user2
+rm -f /tmp/user3
 exit 0
 ;;
 *)
