@@ -99,6 +99,7 @@ kill $p
 echo "kill $p user $u"
 fi
 fi
+fi
 done
 rm -f /tmp/pid
 rm -f /tmp/pid2
