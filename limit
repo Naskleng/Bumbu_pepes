@@ -62,6 +62,27 @@ if [ $? = 1 ];then
 echo $line >> /tmp/user2
 else
 kill $p
+3)
+echo -n > /tmp/user1
+echo -n > /tmp/user2
+echo -n > /tmp/user3
+cat /tmp/pid2 | while read line;do
+set -- $line
+p=$1
+u=$2
+cat /tmp/user1 | grep -i $u > /dev/null
+if [ $? = 1 ];then
+echo $line >> /tmp/user1
+else
+cat /tmp/user2 | grep -i $u > /dev/null
+if [ $? = 1 ];then
+echo $line >> /tmp/user2
+else
+cat /tmp/user1 | grep -i $u > /dev/null
+if [ $? = 1 ];then
+echo $line >> /tmp/user3
+else
+kill $p
 echo "kill $p user $u"
 fi
 fi
@@ -75,9 +96,11 @@ rm -f /tmp/user2
 exit 0
 ;;
 *)
-  echo " gunakan perintah userlmt 1 untuk limit 1 login saja"
-  echo " atau userlmt 2  untuk melimit max 2 login"
-  echo " jika ada kritik saran soal program ini pm mikodemos"     
+  echo " gunakan perintah limit 1 untuk limit 1 login saja"
+  echo " atau limit 2  untuk melimit max 2 login"
+  echo " bisa juga limit 3 untuk max 3 login"
+  echo " jika ada kritik saran soal program ini pm mikodemos"
+  echo " modified by Danyjrx"
 rm -f /tmp/pid
 rm -f /tmp/pid2
 rm -f /tmp/pids
