@@ -46,7 +46,7 @@ rm -f /tmp/pids
 rm -f /tmp/sks
 rm -f /tmp/user1
 exit 0
-;
+;;
 2)
 echo -n > /tmp/user1
 echo -n > /tmp/user2
@@ -74,7 +74,7 @@ rm -f /tmp/sks
 rm -f /tmp/user1
 rm -f /tmp/user2
 exit 0
-;
+;;
 3)
 echo -n > /tmp/user1
 echo -n > /tmp/user2
@@ -89,7 +89,7 @@ echo $line >> /tmp/user1
 else
 cat /tmp/user2 | grep -i $u > /dev/null
 if [ $? = 1 ];then
-echorm -f /tmp/pid2rm -f /tmp/pid2 $line >> /tmp/user2
+echo $line >> /tmp/user2
 else
 cat /tmp/user3 | grep -i $u > /dev/null
 if [ $? = 1 ];then
@@ -110,7 +110,7 @@ rm -f /tmp/user1
 rm -f /tmp/user2
 rm -f /tmp/user3
 exit 0
-;
+;;
 *)
   echo " gunakan perintah limit 1 untuk limit 1 login saja"
   echo " atau limit 2  untuk melimit max 2 login"
