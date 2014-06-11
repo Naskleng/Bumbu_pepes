@@ -78,7 +78,7 @@ cat /tmp/user2 | grep -i $u > /dev/null
 if [ $? = 1 ];then
 echo $line >> /tmp/user2
 else
-cat /tmp/user1 | grep -i $u > /dev/null
+cat /tmp/user3 | grep -i $u > /dev/null
 if [ $? = 1 ];then
 echo $line >> /tmp/user3
 else
