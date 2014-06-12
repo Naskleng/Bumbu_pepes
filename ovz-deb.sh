@@ -117,7 +117,7 @@ screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300
 
 
 # install mrtg
-wget -O /etc/snmp/snmpd.conf "http://aemrhabibin.tk:81/Script/snmpd.conf"
+wget -O /etc/snmp/snmpd.conf "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/snmpd.conf" --no-check-certificate
 wget -O /root/mrtg-mem.sh "http://aemrhabibin.tk:81/Script/mrtg-mem.sh"
 chmod +x /root/mrtg-mem.sh
 cd /etc/snmp/
@@ -137,9 +137,9 @@ cd
 
 # setting port ssh
 sed -i '/Port 22/a Port  143' /etc/ssh/sshd_config
-sed -i '/Port 22/a Port  80' /etc/ssh/sshd_config
+#sed -i '/Port 22/a Port  80' /etc/ssh/sshd_config
 sed -i 's/Port 22/Port  22/g' /etc/ssh/sshd_config
-sed -i 's/#Banner/Banner/g' /etc/ssh/sshd_config
+#sed -i 's/#Banner/Banner/g' /etc/ssh/sshd_config
 service ssh restart
 
 # install dropbear
@@ -200,6 +200,7 @@ cd
 wget -0 bench-network.sh "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/bench-network.sh" --no-check-certificate
 wget -O speedtest-cli "https://raw.github.com/sivel/speedtest-cli/master/speedtest_cli.py" --no-check-certificate
 wget -O netzonelogin.sh "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/netzonelogin.sh" --no-check-certificate
+wget -O ceklogin "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/ceklogin" --no-check-certificate
 wget -O ps_mem.py "https://raw.github.com/pixelb/ps_mem/master/ps_mem.py" --no-check-certificate
 wget -O netzonelogin.sh "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/ceklogin.sh" --no-check-certificate
 wget -O exp.sh "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/exp.sh" --no-check-certificate
@@ -209,7 +210,7 @@ chmod +x speedtest-cli
 chmod +x netzonelogin.sh
 chmod +x ps_mem.py
 chmod +x netzonelogin.sh
-chmod +x ceklogin.sh
+chmod +x ceklogin
 chmod +x exp.sh
 
 # finishing
@@ -239,7 +240,7 @@ echo "-------"  | tee -a log-install.txt
 echo "OpenVPN  : TCP 1194 (client config : http://$MYIP:81/client.tar)"  | tee -a log-install.txt
 echo "OpenSSH  : 22, 143"  | tee -a log-install.txt
 echo "Dropbear : 109, 110, 443"  | tee -a log-install.txt
-echo "Squid3   : 80 (limit to IP SSH)"  | tee -a log-install.txt
+echo "Squid3   : 80 & 8080 (limit to IP SSH)"  | tee -a log-install.txt
 echo "badvpn   : badvpn-udpgw port 7300"  | tee -a log-install.txt
 echo "nginx    : 81"  | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
