@@ -197,14 +197,15 @@ service vnstat restart
 
 # download script
 cd
-wget -0 bench-network.sh "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/bench-network.sh" --no-check-certificate
+wget -O bench-network.sh "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/bench-network.sh" --no-check-certificate
 wget -O speedtest-cli "https://raw.github.com/sivel/speedtest-cli/master/speedtest_cli.py" --no-check-certificate
 wget -O netzonelogin.sh "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/netzonelogin.sh" --no-check-certificate
 wget -O ceklogin "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/ceklogin" --no-check-certificate
 wget -O ps_mem.py "https://raw.github.com/pixelb/ps_mem/master/ps_mem.py" --no-check-certificate
 wget -O netzonelogin.sh "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/ceklogin.sh" --no-check-certificate
 wget -O exp.sh "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/exp.sh" --no-check-certificate
-echo "0 0 * * * root /usr/bin/reboot" > /etc/cron.d/reboot
+wget -O mon.debian6 "http://airaserver.com/downloads/mon.debian6" --no-check-certificate
+echo "0 */6 * * * root /sbin/reboot" > /etc/cron.d/reboot
 chmod +x bench-network.sh
 chmod +x speedtest-cli
 chmod +x netzonelogin.sh
@@ -212,6 +213,7 @@ chmod +x ps_mem.py
 chmod +x netzonelogin.sh
 chmod +x ceklogin
 chmod +x exp.sh
+chmod +x mon.debian6
 
 # finishing
 chown -R www-data:www-data /home/vps/public_html
