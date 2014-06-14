@@ -55,7 +55,7 @@ sysv-rc-conf exim4 off
 apt-file update
 
 # setting vnstat
-vnstat -u -i venet0
+vnstat -u -i eth0
 service vnstat restart
 
 # install screenfetch
