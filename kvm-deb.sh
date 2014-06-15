@@ -24,7 +24,8 @@ sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 service ssh restart
 
 # set repo
-wget -O /etc/apt/sources.list "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/sources.list.debian7"
+wget -O /etc/apt/sources.list "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/sources.list.debian7" --no-check-certificate
+wget "http://www.dotdeb.org/dotdeb.gpg"
 wget "http://www.webmin.com/jcameron-key.asc"
 cat dotdeb.gpg | apt-key add -;rm dotdeb.gpg
 cat jcameron-key.asc | apt-key add -;rm jcameron-key.asc
