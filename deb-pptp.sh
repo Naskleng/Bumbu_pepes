@@ -24,9 +24,9 @@ echo "2) Membuat User"
 echo "============================================"
 read x
 if test $x -eq 1; then
-	echo "Enter username that you want to create (eg. client1 or john):"
+	echo "Masukan username yang akan di buat (Contoh : Dany, Meinaki):"
 	read u
-	echo "Specify password that you want the server to use:"
+	echo "Masukan Password nya:"
 	read p
 
 # get the VPS IP
