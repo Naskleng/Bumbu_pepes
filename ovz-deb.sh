@@ -79,43 +79,6 @@ sed -i 's/listen = \/var\/run\/php5-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php
 service php5-fpm restart
 service nginx restart
 
-# install openvpn
-wget -O /etc/openvpn/openvpn.tar "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/openvpn-debian.tar" --no-check-certificate
-cd /etc/openvpn/
-tar xf openvpn.tar
-wget -O /etc/openvpn/1194.conf "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/1194.conf" --no-check-certificate
-service openvpn restart
-sysctl -w net.ipv4.ip_forward=1
-sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
-wget -O /etc/iptables.up.rules "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/iptables.up.rules" --no-check-certificate
-sed -i '$ i\iptables-restore < /etc/iptables.up.rules' /etc/rc.local
-sed -i $MYIP2 /etc/iptables.up.rules;
-iptables-restore < /etc/iptables.up.rules
-service openvpn restart
-
-# configure openvpn client config
-cd /etc/openvpn/
-wget -O /etc/openvpn/1194-client.ovpn "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/1194-client.conf" --no-check-certificate
-sed -i $MYIP2 /etc/openvpn/1194-client.ovpn;
-PASS=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 15 | head -n 1`;
-useradd -M -s /bin/false Danyjrx
-echo "YurisshOS:$PASS" | chpasswd
-echo "username" >> pass.txt
-echo "password" >> pass.txt
-tar cf client.tar 1194-client.ovpn pass.txt
-cp client.tar /home/vps/public_html/
-cd
-
-# install badvpn
-wget -O /usr/bin/badvpn-udpgw "https://raw.github.com/yurisshOS/debian7os/master/badvpn-udpgw"
-if [ "$OS" == "x86_64" ]; then
-  wget -O /usr/bin/badvpn-udpgw "https://raw.github.com/yurisshOS/debian7os/master/badvpn-udpgw64"
-fi
-sed -i '$ i\screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300' /etc/rc.local
-chmod +x /usr/bin/badvpn-udpgw
-screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300
-
-
 # install mrtg
 wget -O /etc/snmp/snmpd.conf "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/snmpd.conf" --no-check-certificate
 wget -O /root/mrtg-mem.sh "http://aemrhabibin.tk:81/Script/mrtg-mem.sh"
@@ -194,6 +157,10 @@ apt-get -y -f install;
 rm /root/webmin_1.690_all.deb
 service webmin restart
 service vnstat restart
+
+# install PPTP
+wget https://raw.github.com/cwaffles/ezpptp/master/ezpptp.sh
+chmod +x ezpptp.sh && ./ezpptp.sh
 
 # download script
 cd
