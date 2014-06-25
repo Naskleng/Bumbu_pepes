@@ -13,6 +13,10 @@ cd
 echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6
 sed -i '$ i\echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6' /etc/rc.local
 
+# install PPTP
+wget https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/deb-pptp.sh
+chmod +x deb-pptp.sh && deb-pptp.sh
+
 # install wget and curl
 apt-get update;apt-get -y install wget curl;
 
@@ -157,10 +161,6 @@ apt-get -y -f install;
 rm /root/webmin_1.690_all.deb
 service webmin restart
 service vnstat restart
-
-# install PPTP
-wget https://raw.github.com/cwaffles/ezpptp/master/ezpptp.sh
-chmod +x ezpptp.sh && ./ezpptp.sh
 
 # download script
 cd
