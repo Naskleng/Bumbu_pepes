@@ -1,140 +1,101 @@
 #!/bin/bash
-# Interactive PoPToP install script for an OpenVZ VPS
-# Tested on Debian 5, 6, and Ubuntu 11.04
+# Interactive PoPToP install script for an KVM VPS
+# Tested on Debian 6 dan 7
 # April 2, 2013 v1.11
+# Author: Commander Waffles
 # http://www.putdispenserhere.com/pptp-debian-ubuntu-openvz-setup-script/
-
+  
+echo "======================================================"
+echo "Fikriansyah.net | We Learn, We Found and We Share"
+echo "Pastiin ppp udah di enable"
+echo "Pilih nomor 1 jika vps belum terinstall PPTP VPN"
+echo "Jika sudah diinstall, Pilih Nomor 2 untuk menambah user"
 echo "######################################################"
-echo "Interactive PoPToP Install Script for an OpenVZ VPS"
-echo
-echo "Make sure to contact your provider and have them enable"
-echo "IPtables and ppp modules prior to setting up PoPToP."
-echo "PPP can also be enabled from SolusVM."
-echo
-echo "You need to set up the server before creating more users."
-echo "A separate user is required per connection or machine."
 echo "######################################################"
-echo
-echo
-echo "============================================"
-echo "Netzone PPTP Script Installer By Danyjrx"
-echo "Pilh Salah Satu:"
-echo "1) Install PoPToP server dan buat satu user"
-echo "2) Membuat User"
-echo "============================================"
-read x
+echo "Pilihan :"
+echo "1) Install PPTP VPN dan membuat user"
+echo "2) menambah user"
+echo "######################################################"
+read $x
 if test $x -eq 1; then
-	echo "Masukan username yang akan di buat (Contoh : Dany, Meinaki):"
-	read u
-	echo "Masukan Password nya:"
-	read p
-
+    echo "Masukkan username:"
+    read u
+    echo "masukkan password:"
+    read p
+  
 # get the VPS IP
-ip=`ifconfig venet0:0 | grep 'inet addr' | awk {'print $2'} | sed s/.*://`
-
-echo
-echo "===================================="
-echo "Lagi download sama install PoPToP"
-echo "===================================="
+ip=`ifconfig eth0 | grep 'inet addr' | awk {'print $2'} | sed s/.*://`
+  
+echo "######################################################"
+echo "Downloading and Installing PoPToP"
+echo "######################################################"
 apt-get update
 apt-get -y install pptpd nano shorewall unrar
-
-echo
-echo "===================================="
-echo "Membuat Konfigurasi Server"
-echo "===================================="
+  
+echo "######################################################"
+echo "Settting server"
+echo "######################################################"
+cat > /etc/pptpd.conf<<END
+localip 9.9.9.1
+remoteip 9.9.9.20-50
+END
+  
 cat > /etc/ppp/pptpd-options <<END
-name pptpd
-refuse-pap
-refuse-chap
-refuse-mschap
-require-mschap-v2
-require-mppe-128
 ms-dns 8.8.8.8
 ms-dns 8.8.4.4
-proxyarp
-nodefaultroute
-lock
-nobsdcomp
 END
-
-# setting up pptpd.conf
-echo "option /etc/ppp/pptpd-options" > /etc/pptpd.conf
-echo "logwtmp" >> /etc/pptpd.conf
-echo "localip $ip" >> /etc/pptpd.conf
-echo "remoteip 10.1.0.1-100" >> /etc/pptpd.conf
-
+  
 # adding new user
-echo "$u	*	$p	*" >> /etc/ppp/chap-secrets
-
-echo
-echo echo "===================================="
-echo "Mengalihkan IPv4 dan menerapkan saat boot"
-echo echo "===================================="
+echo "$u    pptpd   $p  *" >> /etc/ppp/chap-secrets
+  
+echo "######################################################"
+echo "Forwarding IPv4 and Enabling it on boot"
+echo "######################################################"
 cat >> /etc/sysctl.conf <<END
 net.ipv4.ip_forward=1
+net.ipv4.conf.default.rp_filter = 1
+net.ipv4.conf.all.rp_filter = 1
+net.ipv4.tcp_syncookies = 1
 END
+  
 sysctl -p
-
-echo
-echo "===================================="
-echo "Update iptables routing dan menerapkan saat boot"
-echo "===================================="
-iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE && iptables-save
-iptables --table nat --append POSTROUTING --out-interface ppp0 -j MASQUERADE
-iptables -I INPUT -s 10.0.0.0/8 -i ppp0 -j ACCEPT
-iptables --append FORWARD --in-interface eth0 -j ACCEPT
-# saves iptables routing rules and enables them on-boot
-iptables-save > /etc/iptables.conf
-
-cat > /etc/network/if-pre-up.d/iptables <<END
-#!/bin/sh
-iptables-restore < /etc/iptables.conf
-END
-
-chmod +x /etc/network/if-pre-up.d/iptables
-cat >> /etc/ppp/ip-up <<END
-ifconfig ppp0 mtu 1400
-END
-
-echo
-echo "===================================="
-echo "Restart PoPToP"
-echo "===================================="
-sleep 5
+  
+echo "######################################################"
+echo "Updating IPtables Routing and Enabling it on boot"
+echo "######################################################"
+cd /etc/shorewall
+wget https://www.dropbox.com/s/k01cjc2zi9eemsq/shorewall-kvm.rar
+unrar e shorewall-kvm.rar
+rm shorewall-kvm.rar
+echo "shorewall start" >> /etc/rc.local
+shorewall restart
 /etc/init.d/pptpd restart
-
-echo
-echo "===================================="
-echo "Sudah Selesai"
-echo "Silahkan konek VPN PPTP $ip dengan user & pass berikut:"
+  
+echo "######################################################"
+echo "Server setup complete!"
+echo "Connect PPTP VPN dengan IP $ip :"
 echo "Username:$u ##### Password: $p"
-echo "===================================="
-
-echo "Script Edited By Dany Meinaki"
-
+echo "######################################################"
+  
 # runs this if option 2 is selected
 elif test $x -eq 2; then
-	echo "Masukan username yang akan di buat (Contoh : Dany, Meinaki):"
-	read u
-	echo "Masukan Password nya:"
-	read p
-
+    echo "Masukkan username:"
+    read u
+    echo "ketikkan passwordnya:"
+    read p
+  
 # get the VPS IP
-ip=`ifconfig venet0:0 | grep 'inet addr' | awk {'print $2'} | sed s/.*://`
-
+ip=`ifconfig eth0 | grep 'inet addr' | awk {'print $2'} | sed s/.*://`
+  
 # adding new user
-echo "$u	*	$p	*" >> /etc/ppp/chap-secrets
-
-echo
-echo "===================================="
-echo "User PPTP Sukses di buat!"
-echo "Silahkan konek VPN PPTP $ip dengan user & pass berikut:"
+echo "$u    pptpd   $p  *" >> /etc/ppp/chap-secrets
+  
+echo "######################################################"
+echo "User PPTP VPN sudah ditambah!"
+echo "Connect PPTP VPN dengan IP $ip :"
 echo "Username:$u ##### Password: $p"
-echo "===================================="
-
-echo "Script Edited By Dany Meinaki"
-
+echo "######################################################"
+  
 else
 echo "Invalid selection, quitting."
 exit
