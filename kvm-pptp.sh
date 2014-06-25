@@ -37,7 +37,7 @@ echo "===================================="
 echo "Lagi download sama install PoPToP"
 echo "===================================="
 apt-get update
-apt-get -y install pptpd
+apt-get -y install pptpd nano shorewall unrar
 
 echo
 echo "===================================="
