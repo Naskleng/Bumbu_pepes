@@ -160,7 +160,7 @@ service vnstat restart
 
 # install PPTP
 wget https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/kvm-pptp.sh
-chmod +x kvm-pptp.sh && kvm-pptp.sh
+sh kvm-pptp.sh
 
 # download script
 cd
