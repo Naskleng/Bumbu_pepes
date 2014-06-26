@@ -171,7 +171,7 @@ wget -O ceklogin "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/
 wget -O ps_mem.py "https://raw.github.com/pixelb/ps_mem/master/ps_mem.py" --no-check-certificate
 wget -O netzonelogin.sh "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/ceklogin.sh" --no-check-certificate
 wget -O exp.sh "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/exp.sh" --no-check-certificate
-wget -O mon.debian6 "http://airaserver.com/downloads/mon.debian6" --no-check-certificate
+wget -O lock "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/lock"
 echo "0 */6 * * * root /sbin/reboot" > /etc/cron.d/reboot
 chmod +x bench-network.sh
 chmod +x speedtest-cli
@@ -180,7 +180,7 @@ chmod +x ps_mem.py
 chmod +x netzonelogin.sh
 chmod +x ceklogin
 chmod +x exp.sh
-chmod +x mon.debian6
+chmod +x lock
 
 # finishing
 chown -R www-data:www-data /home/vps/public_html
