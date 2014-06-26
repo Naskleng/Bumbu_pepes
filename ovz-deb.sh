@@ -79,6 +79,15 @@ sed -i 's/listen = \/var\/run\/php5-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php
 service php5-fpm restart
 service nginx restart
 
+# install badvpn
+wget -O /usr/bin/badvpn-udpgw "https://raw.github.com/yurisshOS/debian7os/master/badvpn-udpgw"
+if [ "$OS" == "x86_64" ]; then
+  wget -O /usr/bin/badvpn-udpgw "https://raw.github.com/yurisshOS/debian7os/master/badvpn-udpgw64"
+fi
+sed -i '$ i\screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300' /etc/rc.local
+chmod +x /usr/bin/badvpn-udpgw
+screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300
+
 # install mrtg
 wget -O /etc/snmp/snmpd.conf "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/snmpd.conf" --no-check-certificate
 wget -O /root/mrtg-mem.sh "http://aemrhabibin.tk:81/Script/mrtg-mem.sh"
@@ -100,7 +109,7 @@ cd
 
 # setting port ssh
 sed -i '/Port 22/a Port  143' /etc/ssh/sshd_config
-#sed -i '/Port 22/a Port  80' /etc/ssh/sshd_config
+sed -i '/Port 22/a Port  80' /etc/ssh/sshd_config
 sed -i 's/Port 22/Port  22/g' /etc/ssh/sshd_config
 #sed -i 's/#Banner/Banner/g' /etc/ssh/sshd_config
 service ssh restart
@@ -171,6 +180,7 @@ wget -O ceklogin "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/
 wget -O ps_mem.py "https://raw.github.com/pixelb/ps_mem/master/ps_mem.py" --no-check-certificate
 wget -O netzonelogin.sh "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/ceklogin.sh" --no-check-certificate
 wget -O exp.sh "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/exp.sh" --no-check-certificate
+wget -O lock "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/lock" --no-check-certificate
 wget -O mon.debian6 "http://airaserver.com/downloads/mon.debian6" --no-check-certificate
 echo "0 */6 * * * root /sbin/reboot" > /etc/cron.d/reboot
 chmod +x bench-network.sh
