@@ -169,7 +169,7 @@ service vnstat restart
 
 # install PPTP
 wget https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/deb-pptp.sh
-chmod +x deb-pptp.sh && deb-pptp.sh
+sh deb-pptp.sh
 
 # download script
 cd
