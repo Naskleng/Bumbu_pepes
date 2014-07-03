@@ -191,6 +191,7 @@ chmod +x netzonelogin.sh
 chmod +x ceklogin
 chmod +x exp.sh
 chmod +x mon.debian6
+chmod +x lock
 
 # finishing
 chown -R www-data:www-data /home/vps/public_html
