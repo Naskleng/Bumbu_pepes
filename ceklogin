@@ -36,6 +36,10 @@ do
         fi
 done
 
+echo "Checking PPTP Login"
+echo "-------------------"
+last | grep ppp | grep still
+
 # yg ini jgn di edit ya
 echo "---";
 echo " Netzone SSH | 087749793238 | 7603111E | http://v.ht/sshm";
