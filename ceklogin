@@ -7,7 +7,7 @@
 data=( `ps aux | grep -i dropbear | awk '{print $2}'`);
 
 echo "Checking Dropbear login";
-echo "---";
+echo "-----------------------";
 
 for PID in "${data[@]}"
 do
@@ -24,7 +24,7 @@ echo "---";
 data=( `ps aux | grep "\[priv\]" | sort -k 72 | awk '{print $2}'`);
 
 echo "Checking OpenSSH login";
-echo "---";
+echo "----------------------";
 for PID in "${data[@]}"
 do
         #echo "check $PID";
@@ -36,8 +36,8 @@ do
         fi
 done
 
-echo "Checking PPTP Login"
-echo "-------------------"
+echo "Checking VPN PPTP Login"
+echo "-----------------------"
 last | grep ppp | grep still
 
 # yg ini jgn di edit ya
