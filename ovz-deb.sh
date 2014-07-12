@@ -167,10 +167,6 @@ rm /root/webmin_1.690_all.deb
 service webmin restart
 service vnstat restart
 
-# install PPTP
-wget https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/deb-pptp.sh
-sh deb-pptp.sh
-
 # download script
 cd
 wget -O bench-network.sh "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/bench-network.sh" --no-check-certificate
