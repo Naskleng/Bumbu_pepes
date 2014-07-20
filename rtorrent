@@ -43,9 +43,9 @@ cd rtorrent
 
 # Installing libtorrent.
 
-wget http://libtorrent.rakshasa.no/downloads/libtorrent-0.13.3.tar.gz
-tar -zxvf libtorrent-0.13.3.tar.gz
-cd libtorrent-0.13.3
+wget http://vps6.net/src/libtorrent-0.13.0.tar.gz
+tar -zxvf libtorrent-0.13.0.tar.gz
+cd libtorrent-0.13.0
 ./autogen.sh
 ./configure
 make
@@ -109,15 +109,15 @@ fi
 
 # Installing rutorrent.
 
-wget http://dl.bintray.com/novik65/generic/rutorrent-3.6.tar.gz
-tar -zxvf rutorrent-3.6.tar.gz
+wget http://vps6.net/src/rutorrent-3.0.tar.gz
+tar -zxvf rutorrent-3.0.tar.gz
 
 if [ -d /var/www/rutorrent ]; then
 	rm -r /var/www/rutorrent
 fi
 
 mv -f rutorrent /var/www/
-rm -v rutorrent-3.6.tar.gz
+rm -v rutorrent-3.0.tar.gz
 
 plugindir="/var/www/rutorrent/plugins/"
 
@@ -742,10 +742,10 @@ tput sgr0
 echo
 
 if [ -z "$(ip addr | grep eth0)" ]; then
-	echo "Visit rutorrent at http://IP.ADDRESS/rutorrent" 
+	echo "Visit rutorrent at http://IP/rutorrent" 
 else
 	ip=$(ip addr | grep eth0 | grep inet | awk '{print $2}' | cut -d/ -f1)
 	echo "Visit rutorrent at http://$ip/rutorrent"
 fi
 echo
-echo -e "\033[0;32;148mPatrick Kerwood - http://LinuxBloggen.dk\033[39m"
+echo -e "\033[0;32;148mDanyjrx - fb.me/suji.outSIDer\033[39m"
