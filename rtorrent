@@ -10,18 +10,6 @@ if [ "$(id -u)" != "0" ]; then
 	exit 1
 fi
 
-# Checking if OS is Debian.
-
-if [ -z "$(cat /proc/version | grep Debian)" ] || [ -z "$(cat /etc/issue | grep Debian)" ]; then
-                echo
-                echo "This script is ONLY meant for Debian!"
-                echo "This is not Debian!"
-                echo
-                read -p "Press any key to quit..." -n 1
-                echo
-                exit
-fi
-
 # Licens
 
 echo "  ----------------------------------------------------------------------------
