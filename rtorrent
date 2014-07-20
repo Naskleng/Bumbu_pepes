@@ -22,33 +22,6 @@ echo "  ------------------------------------------------------------------------
   ----------------------------------------------------------------------------"
  echo
  
-# Prompting for system user.
-
-con=0
-while [ $con -eq 0 ]; do
-
-        echo -n "Please type a valid system user: "
-        read -e user
-        uid=$(cat /etc/passwd | grep "$user": | cut -d: -f3)
-
-        if [ -z $(cat /etc/passwd | grep "$user":) ]; then
-                echo
-                echo "This user does not exist!"
-
-        elif [ $uid -lt 999 ]; then
-                echo
-                echo "That user's UID is too low!"
-
-        elif [ $user == nobody ]; then
-                echo
-                echo "You cant use 'nobody' as user!"
-        else
-                con=1
-        fi
-done
-
-homedir=$(cat /etc/passwd | grep "$user": | cut -d: -f6)
-
 # Installing dependencies
 
 apt-get update
