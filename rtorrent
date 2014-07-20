@@ -10,6 +10,18 @@ if [ "$(id -u)" != "0" ]; then
 	exit 1
 fi
 
+# Checking if OS is Debian.
+
+if [ -z "$(cat /proc/version | grep Debian)" ] || [ -z "$(cat /etc/issue | grep Debian)" ]; then
+                echo
+                echo "This script is ONLY meant for Debian!"
+                echo "This is not Debian!"
+                echo
+                read -p "Press any key to quit..." -n 1
+                echo
+                exit
+fi
+
 # Licens
 
 echo "  ----------------------------------------------------------------------------
@@ -22,6 +34,33 @@ echo "  ------------------------------------------------------------------------
   ----------------------------------------------------------------------------"
  echo
  
+# Prompting for system user.
+
+con=0
+while [ $con -eq 0 ]; do
+
+        echo -n "Please type a valid system user: "
+        read -e user
+        uid=$(cat /etc/passwd | grep "$user": | cut -d: -f3)
+
+        if [ -z $(cat /etc/passwd | grep "$user":) ]; then
+                echo
+                echo "This user does not exist!"
+
+        elif [ $uid -lt 999 ]; then
+                echo
+                echo "That user's UID is too low!"
+
+        elif [ $user == nobody ]; then
+                echo
+                echo "You cant use 'nobody' as user!"
+        else
+                con=1
+        fi
+done
+
+homedir=$(cat /etc/passwd | grep "$user": | cut -d: -f6)
+
 # Installing dependencies
 
 apt-get update
@@ -43,9 +82,9 @@ cd rtorrent
 
 # Installing libtorrent.
 
-wget http://vps6.net/src/libtorrent-0.13.0.tar.gz
-tar -zxvf libtorrent-0.13.0.tar.gz
-cd libtorrent-0.13.0
+wget http://libtorrent.rakshasa.no/downloads/libtorrent-0.13.3.tar.gz
+tar -zxvf libtorrent-0.13.3.tar.gz
+cd libtorrent-0.13.3
 ./autogen.sh
 ./configure
 make
@@ -54,9 +93,9 @@ cd ..
 
 # Installing rtorrent.
 
-wget http://vps6.net/src/rtorrent-0.9.0.tar.gz
-tar -zxvf rtorrent-0.9.0.tar.gz
-cd rtorrent-0.9.0
+wget http://libtorrent.rakshasa.no/downloads/rtorrent-0.9.3.tar.gz
+tar -zxvf rtorrent-0.9.3.tar.gz
+cd rtorrent-0.9.3
 ./autogen.sh
 ./configure --with-xmlrpc-c
 make
@@ -109,15 +148,15 @@ fi
 
 # Installing rutorrent.
 
-wget http://vps6.net/src/rutorrent-3.0.tar.gz
-tar -zxvf rutorrent-3.0.tar.gz
+wget http://dl.bintray.com/novik65/generic/rutorrent-3.6.tar.gz
+tar -zxvf rutorrent-3.6.tar.gz
 
 if [ -d /var/www/rutorrent ]; then
 	rm -r /var/www/rutorrent
 fi
 
 mv -f rutorrent /var/www/
-rm -v rutorrent-3.0.tar.gz
+rm -v rutorrent-3.6.tar.gz
 
 plugindir="/var/www/rutorrent/plugins/"
 
@@ -742,10 +781,10 @@ tput sgr0
 echo
 
 if [ -z "$(ip addr | grep eth0)" ]; then
-	echo "Visit rutorrent at http://IP/rutorrent" 
+	echo "Visit rutorrent at http://IP.ADDRESS/rutorrent" 
 else
 	ip=$(ip addr | grep eth0 | grep inet | awk '{print $2}' | cut -d/ -f1)
 	echo "Visit rutorrent at http://$ip/rutorrent"
 fi
 echo
-echo -e "\033[0;32;148mDanyjrx - fb.me/suji.outSIDer\033[39m"
+echo -e "\033[0;32;148mPatrick Kerwood - http://LinuxBloggen.dk\033[39m"
