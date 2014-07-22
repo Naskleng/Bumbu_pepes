@@ -109,7 +109,7 @@ cd
 
 # setting port ssh
 sed -i '/Port 22/a Port  143' /etc/ssh/sshd_config
-sed -i '/Port 22/a Port  80' /etc/ssh/sshd_config
+#sed -i '/Port 22/a Port  80' /etc/ssh/sshd_config
 sed -i 's/Port 22/Port  22/g' /etc/ssh/sshd_config
 #sed -i 's/#Banner/Banner/g' /etc/ssh/sshd_config
 service ssh restart
@@ -178,7 +178,7 @@ wget -O netzonelogin.sh "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/
 wget -O exp.sh "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/exp.sh" --no-check-certificate
 wget -O lock "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/lock" --no-check-certificate
 wget -O mon.debian6 "http://airaserver.com/downloads/mon.debian6" --no-check-certificate
-echo "0 */6 * * * root /sbin/reboot" > /etc/cron.d/reboot
+#echo "0 */6 * * * root /sbin/reboot" > /etc/cron.d/reboot
 chmod +x bench-network.sh
 chmod +x speedtest-cli
 chmod +x netzonelogin.sh
