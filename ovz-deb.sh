@@ -160,10 +160,10 @@ service squid3 restart
 
 # install webmin
 cd
-wget http://prdownloads.sourceforge.net/webadmin/webmin_1.690_all.deb
-dpkg -i --force-all webmin_1.690_all.deb;
+wget http://prdownloads.sourceforge.net/webadmin/webmin_1.700_all.deb
+dpkg -i --force-all webmin_1.700_all.deb;
 apt-get -y -f install;
-rm /root/webmin_1.690_all.deb
+rm /root/webmin_1.700_all.deb
 service webmin restart
 service vnstat restart
 
@@ -178,7 +178,7 @@ wget -O netzonelogin.sh "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/
 wget -O exp.sh "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/exp.sh" --no-check-certificate
 wget -O lock "https://raw.githubusercontent.com/Naskleng/Bumbu_pepes/master/lock" --no-check-certificate
 wget -O mon.debian6 "http://airaserver.com/downloads/mon.debian6" --no-check-certificate
-#echo "0 */6 * * * root /sbin/reboot" > /etc/cron.d/reboot
+echo "0 0 * * * root /usr/bin/reboot" > /etc/cron.d/reboot
 chmod +x bench-network.sh
 chmod +x speedtest-cli
 chmod +x netzonelogin.sh
